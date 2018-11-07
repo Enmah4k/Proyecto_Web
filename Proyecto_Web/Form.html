@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Formulario</title>
+        <link href="Recursos/css/Style.css" type="text/css" rel="StyleSheet">
+        <link rel="icon" type="image/png" href="Recursos/img/ico.png"/>
+        <link href="Recursos/css/bootstrap-responsive.css" type="text/css" rel="StyleSheet">
+        <script type="text/javascript" src="Recursos/js/scriptJS.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    </head>
+    <body style="background-color: #FFF544">
+        <header>
+            <h1>formulario</h1>
+        </header>
+        <br>
+        <div>
+            <form action="" method="get" class="formulario">
+                <h2 class="formulario-titulo">INTRODUCCIÓN</h2>
+                <input type="text" class="formulario-input" id="inp-nombre" name="inp-nombre" placeholder="Nombre:" required>
+                <input type="number" min="1" max="120" class="formulario-input" id="inp-edad" name="inp-edad" placeholder="Edad:" required>
+                <input type="text" class="formulario-input" id="inp-color" name="inp-color" list="l1ist" placeholder="Color:" pattern="[Rr]ojo|[Aa]zul|[Vv]erde|[Aa]marillo|[Nn]aranja">
+                <input type="button" value="Inicio" onclick="location='Index.html'" class="button" style="margin-top: 5px">
+                <input type="submit" value="Continuar" onclick="formulario()" class="button">
+                <datalist id="l1ist">
+                    <option>Rojo</option>
+                    <option>Azul</option>
+                    <option>Verde</option>
+                    <option>Amarillo</option>
+                    <option>Naranja</option>
+                </datalist>
+            </form>
+        </div>
+    </body>
+</html>

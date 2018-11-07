@@ -1,0 +1,152 @@
+<!DOCTYPE htm>
+<hmtl>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>La Culebrita</title>
+        <link href="Recursos/css/Style.css" type="text/css" rel="StyleSheet">
+        <link href="Recursos/css/bootstrap-responsive.css" type="text/css" rel="StyleSheet">
+        <link rel="icon" type="image/png" href="Recursos/img/snake.png"/>
+        <script>
+            window.onload=function() {
+                canv=document.getElementById("gc");
+                ctx=canv.getContext("2d");
+                document.addEventListener("keydown",keyPush);
+                setInterval(game,1000/15);
+                setInterval(tiempo,1000);
+            }
+            px=py=10;
+            gs=tc=20;
+            ax=ay=15;
+            xv=yv=0;
+            trail=[];
+            tail = 3;
+            cont = 0;
+            neg_cont = 60;
+            
+            function tiempo()
+            {
+                if (cont > 0)
+                {
+                    neg_cont--;
+                }
+                document.getElementById("time").innerHTML = "Tiempo: "+(neg_cont)+"s";
+                if (neg_cont < 0)
+                {
+                    preguntar()
+                }
+            }
+            
+            function preguntar(){ 
+                confirmar=confirm("Tiempo Agotado!\nTu puntaje es: "+cont+"\nPresione Aceptar para reintentar o Cancelar para volver al inicio."); 
+                if (confirmar) 
+                window.location.href = "Canvas.html";
+                else 
+                window.location.href = "Index.html";
+            } 
+            
+            function game() {
+                tail_ant = 0;
+                px+=xv;
+                py+=yv;
+                if(px<-1) {
+                    px= tc-1;
+                }
+                if(px>tc) {
+                    px= 0;
+                    
+                }
+                if(py<-1) {
+                    py= tc-1;
+
+                }
+                if(py>tc) {
+                    py= 0;
+                }
+
+                ctx.fillStyle="#000000";
+                ctx.fillRect(0,0,canv.width,canv.height);
+                ctx.fillStyle="#65FF21";
+                for(var i=0;i<trail.length;i++) {
+                    ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-1,gs-1);
+                    if(trail[i].x==px && trail[i].y==py) {
+                        
+                    }
+                }
+                
+                trail.push({x:px,y:py});
+                while(trail.length>tail) {
+                trail.shift();
+                }
+                if(ax==px && ay==py) {
+                    tail++;
+                    cont = cont + 5;
+                    ax=Math.floor(Math.random()*tc);
+                    ay=Math.floor(Math.random()*tc);
+                    document.getElementById("score").innerHTML = "Puntuación: "+(cont);
+                }
+                ctx.fillStyle="#FFFFFF";
+                ctx.fillRect(ax*gs,ay*gs,gs-2,gs-2);
+            }
+
+            function izq()
+            {
+                xv=-1;yv=0;
+            }
+            function der()
+            {
+                xv=1;yv=0;
+            }
+            function up()
+            {
+                xv=0;yv=-1;
+            }
+            function down()
+            {
+                xv=0;yv=1;
+            }
+            function keyPush(evt) {
+                switch(evt.keyCode) {
+                    case 37:
+                        xv=-1;yv=0;
+                        break;
+                    case 38:
+                        xv=0;yv=-1;
+                        break;
+                    case 39:
+                        xv=1;yv=0;
+                        break;
+                    case 40:
+                        xv=0;yv=1;
+                        break;
+                }
+            }
+        </script>
+    </head>
+    <body bgColor="#FFF544">
+        <header>
+            <div>
+                <h2 class="time" id="time">Tiempo: 60s </h2>
+                <h2 class="score" id="score">Puntuación: 0</h2>
+            </div>
+        </header>
+        <div>
+            <br>
+            <div>
+                <input type="button" value="inicio" onclick="location='Index.html'" class="button">
+            </div>
+            <br>
+            <div>
+                <canvas id="gc" width="400" height="400"></canvas>
+            </div>
+            <div>
+                <br>
+                <input type="button" value=" ↑ " onclick="up()"  class="butt">
+                <br>
+                <input type="button" value="←" onclick="izq()" id="primo"  class="butt"><input type="button" value=" ↓ " onclick="down()"  class="butt"><input type="button" value="→" onclick="der()"  class="butt">
+                <br>
+            </div>
+            <br>
+        </div>
+    </body>
+</hmtl>
